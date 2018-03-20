@@ -1,0 +1,143 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class ="col-8">
+            <table class="table table-hover table-active">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Year</th>
+                    <th scope="col">Country</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Victory</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for member in members %}
+                    <tr>
+                        <td>{{ member.Name }}</td>
+                        <td>{{ member.Year }}</td>
+                        <td>{{ member.Country }}</td>
+                        <td>{{ member.Brand }}</td>
+                        <td>{{ member.Victory }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-3">
+        <h1>Questions :</h1>
+
+            <p><span style="font-weight: bold;color: rebeccapurple;text-decoration: underline;">Longest name :</span> <br>{{ questions.Name.name }} ({{ questions.Name.length }})</p>
+            <p><span style="font-weight: bold;color: rebeccapurple;text-decoration: underline;">Oldest member : </span><br> {{ questions.oldest.name }} ({{questions.oldest.year}})</p>
+            <p><span style="font-weight: bold;color: rebeccapurple;text-decoration: underline;">Most represented country :</span> <br>{{ questions.country.name }} ({{ questions.country.value }})</p>
+            <p><span style="font-weight: bold;color: rebeccapurple;text-decoration: underline;">Brand with two or more cyclist : </span><br>{{ questions.brand }}</p>
+            <p><span style="font-weight: bold;color: rebeccapurple;text-decoration: underline;">Cyclist without skills (0 victory) : </span> <br> {{ questions.victory }}</p>
+            <p><span style="font-weight: bold;color: rebeccapurple;text-decoration: underline;">Average year : </span> <br>  {{ questions.average }} year old</p>
+        </div>
+
+    </div>
+    <hr>
+    <div class="row">
+    <div class="col-11">
+        <table class="table table-hover table-active">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Year</th>
+                <th scope="col">Country</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Victory</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for member in randoms %}
+                <tr>
+                    <td>{{ member.Name }}</td>
+                    <td>{{ member.Year }}</td>
+                    <td>{{ member.Country }}</td>
+                    <td>{{ member.Brand }}</td>
+                    <td>{{ member.Victory }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-4">
+        <h1>Not in random array?:</h1>
+        {% if notUnion is empty %}
+        <p style="color:red; font-weight: bold;"> Table is empty !</p>
+        {% else %}
+        <table class="table table-hover table-active">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Year</th>
+                <th scope="col">Country</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Victory</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+            {% for member in notUnion %}
+                <tr>
+                    <td>{{ member.Name }}</td>
+                    <td>{{ member.Year }}</td>
+                    <td>{{ member.Country }}</td>
+                    <td>{{ member.Brand }}</td>
+                    <td>{{ member.Victory }}</td>
+                </tr>
+            {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+
+    </div>
+
+        <div class="col-7">
+            <h1>In random array? / How many?  :</h1>
+            {% if   union is empty %} {# it's imposible I know#}
+            <p style="color:red; font-weight: bold;"> Table is empty !</p>
+            {% else %}
+            <table class="table table-hover table-active">
+                <thead>
+                <tr>
+                    <th scope="col">Count</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Year</th>
+                    <th scope="col">Country</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Victory</th>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                {% for member in union %}
+                    <tr>
+                        <th scope="row" style="color:rebeccapurple">{{ member.Count }}</th>
+                        <td>{{ member.Name }}</td>
+                        <td>{{ member.Year }}</td>
+                        <td>{{ member.Country }}</td>
+                        <td>{{ member.Brand }}</td>
+                        <td>{{ member.Victory }}</td>
+                    </tr>
+                {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+
+</div>
+{% endblock %}
